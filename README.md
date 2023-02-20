@@ -2,7 +2,8 @@
 
 ## Project setup
 ```
-npm install
+npm install -g @vue/cli
+npm create app1
 ```
 
 ### Compiles and hot-reloads for development

@@ -2,11 +2,14 @@
   <h4>User form</h4>
   <input v-model="fname" />
   <input v-model="age" type="number" />
+  <input type='radio' name='gender' v-model='gender' value='Male'>Male
+  <input type='radio' name='gender' v-model='gender' value='Female'>Female
+
   <button @click="add" :disabled="fname.length < 1">save</button>{{ count }}
   <ol>
-    <li v-for="user in users" :key="user.id">
+    <li v-for="(user, index) in users" :key="user.id">
       {{ user.id }}{{ user.fname }}, {{ user.age
-      }}<button @click="deleteUser(user)">delete</button>
+      }}<button @click="deleteUser(user.id, index)">delete</button>
     </li>
   </ol>
 </template>
@@ -20,8 +23,13 @@ export default {
     },
   },
   methods: {
-    deleteUser: function (user) {
-      this.users.splice(user.id - 1, 1);
+    deleteUser: function (userid, index) {
+      const promise = fetch(process.env.VUE_APP_ROOT_API + userid, {
+        method: "delete",
+      });
+      promise.then(() => {
+        this.users.splice(index, 1);
+      });
     },
     add: function () {
       const payload = Object.assign({}, this); //copy of model
@@ -33,15 +41,17 @@ export default {
         },
         body: JSON.stringify(payload),
       });
-      promise.then((response) => {//success handler
+      promise.then((response) => {
+        //success handler
         response.json().then((user) => {
           this.users.push(user);
         });
       });
-      promise.catch((error)=> alert(error));
+      promise.catch((error) => alert(error));
     },
   },
-  data() {//state of component
+  data() {
+    //state of component
     const model = {
       fname: "Pariwesh",
       age: 10,

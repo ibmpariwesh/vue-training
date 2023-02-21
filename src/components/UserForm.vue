@@ -26,7 +26,7 @@ export default {
     add: function () {
       const payload = Object.assign({}, this); //copy of model
       delete payload.users;
-      const promise = fetch("http://localhost:3000/users", {
+      const promise = fetch(process.env.VUE_APP_ROOT_API, {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -38,6 +38,7 @@ export default {
           this.users.push(user);
         });
       });
+      promise.catch((error)=> alert(error));
     },
   },
   data() {//state of component
@@ -46,7 +47,7 @@ export default {
       age: 10,
       users: [],
     };
-    const promise = fetch("http://localhost:3000/users");
+    const promise = fetch(process.env.VUE_APP_ROOT_API);
     promise.then((response) => {
       response.json().then((users) => {
         this.users = users;

@@ -5,6 +5,7 @@
   <input type='radio' name='gender' v-model='gender' value='Male'>Male
   <input type='radio' name='gender' v-model='gender' value='Female'>Female
 
+  <input type='checkbox' v-model='registered' :true-value='true' :false-value='false'/>Registered?
   <button @click="add" :disabled="fname.length < 1">save</button>{{ count }}
   <ol>
     <li v-for="(user, index) in users" :key="user.id">
@@ -55,6 +56,7 @@ export default {
     const model = {
       fname: "Pariwesh",
       age: 10,
+      registered:true,
       users: [],
     };
     const promise = fetch(process.env.VUE_APP_ROOT_API);

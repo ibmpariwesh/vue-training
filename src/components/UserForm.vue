@@ -1,36 +1,58 @@
 <template>
   <h4>User form</h4>
   <input v-model="fname" />
-   <input v-model="age" type='number'/>
-  <button @click='add' :disabled='fname.length < 1'>save</button>{{count}}
+  <input v-model="age" type="number" />
+  <button @click="add" :disabled="fname.length < 1">save</button>{{ count }}
   <ol>
-    <li v-for='user in users' :key='user.id'>
-        {{user.id}}{{user.fname}}, {{user.age}}
+    <li v-for="user in users" :key="user.id">
+      {{ user.id }}{{ user.fname }}, {{ user.age
+      }}<button @click="deleteUser(user)">delete</button>
     </li>
   </ol>
 </template>
 
 <script>
-let counter =0;//db
 export default {
   name: "UserForm",
-  computed:{
-      count(){
-          return this.users.length
-      }
+  computed: {
+    count() {
+      return this.users.length;
+    },
   },
   methods: {
-      add:function () {
-          console.log(this.fname);
-          this.users.push({id:++counter, fname:this.fname, age:this.age});
-      }
+    deleteUser: function (user) {
+      this.users.splice(user.id - 1, 1);
+    },
+    add: function () {
+      const payload = Object.assign({}, this); //copy of model
+      delete payload.users;
+      const promise = fetch("http://localhost:3000/users", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+      promise.then((response) => {//success handler
+        response.json().then((user) => {
+          this.users.push(user);
+        });
+      });
+    },
   },
-  data() {
-    return {
+  data() {//state of component
+    const model = {
       fname: "Pariwesh",
-      age:0,
-      users:[]
+      age: 10,
+      users: [],
     };
+    const promise = fetch("http://localhost:3000/users");
+    promise.then((response) => {
+      response.json().then((users) => {
+        this.users = users;
+      });
+    });
+    return model;
   },
   components: {},
 };

@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import { nextTick } from 'vue'
+
 let counter =0;//db
 export default {
   name: "UserForm",
@@ -21,7 +23,10 @@ export default {
   },
   methods: {
       add:function () {
+        // console.log(eventBus);
+         nextTick(() => {
           console.log(this.fname);
+      })
           this.users.push({id:++counter, fname:this.fname, age:this.age});
       }
   },

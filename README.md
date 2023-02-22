@@ -2,6 +2,10 @@
 npm i -g json-server
 json-server db.json --watch
 
+pending
+-------
+see unmount when we navigate
+
 ## Project setup
 ```
 npm install -g @vue/cli

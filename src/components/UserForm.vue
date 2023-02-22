@@ -11,6 +11,12 @@
     :true-value="true"
     :false-value="false"
   />Registered? <button @click="add" :disabled="fname.length < 1">save</button>{{ count }}
+  {{ selected }}
+  <select v-model="selected" >
+    <option value="">Select one</option>
+    <option value="" v-for='option in options' :key='option'>{{option}}</option>
+
+  </select>
   <ol>
     <li v-for="(user, index) in users" :key="user.id">
       {{ user.id }}{{ user.fname }}, {{ user.age
@@ -29,7 +35,7 @@ export default {
   },
   methods: {
     deleteUser: function (userid, index) {
-      const promise = fetch(process.env.VUE_APP_ROOT_API + userid, {
+      const promise = fetch(process.env.VUE_APP_ROOT_API+'users/' + userid, {
         method: "delete",
       });
       promise.then(() => {
@@ -58,8 +64,10 @@ export default {
   data() {
     //state of component
     const model = {
+      selected: "B",
       fname: "Pariwesh",
       age: 10,
+      options:[],
       registered: true,
       users: [],
     };
@@ -68,20 +76,28 @@ export default {
   },
   components: {},
   mounted() {
-    console.log('mounted');
+    //after DOM is pushed in DOM tree
+    console.log("mounted");
   },
-  beforeMount(){
-    const promise = fetch(process.env.VUE_APP_ROOT_API);
+  beforeMount() {
+    const promise = fetch(process.env.VUE_APP_ROOT_API+'users');
     promise.then((response) => {
       response.json().then((users) => {
         this.users = users;
       });
     });
-    console.log('beforeMount');
+    const promise1 = fetch(process.env.VUE_APP_ROOT_API+'options/');
+    promise1.then((response) => {
+      response.json().then((options) => {
+        this.options = options;
+      });
+    });
+    console.log("beforeMount");
   },
-  beforeUpdate(){
-    console.log('beforeUpdate');
-  }
+  beforeUpdate() {
+    console.log("beforeUpdate");
+  },
+  unmounted() {},
 };
 </script>
 

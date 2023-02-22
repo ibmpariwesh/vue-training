@@ -1,16 +1,4 @@
 {
-  "users": [
-    {
-      "fname": "Pariwesh gupta",
-      "age": 10,
-      "count": 3,
-      "id": 1
-    },
-    {
-      "fname": "Pariwesh",
-      "age": 10,
-      "count": 0,
-      "id": 2
-    }
-  ]
+  "users": [],
+  "options":["A", "B","C"]
 }

@@ -1,5 +1,5 @@
 <template>
-<CounterC count=21 prop2='test'></CounterC>
+<CounterC :count='users.length' prop2='test' @my-event="listenFromChild"></CounterC>
   <h4>User form</h4>
   <input v-model="fname" />
   <input v-model="age" type="number" />
@@ -44,10 +44,13 @@ export default {
         this.users.splice(index, 1);
       });
     },
+    listenFromChild:function () {
+      console.log('test', arguments[0]);
+    },
     add: function () {
       const payload = Object.assign({}, this); //copy of model
       delete payload.users;
-      const promise = fetch(process.env.VUE_APP_ROOT_API, {
+      const promise = fetch(process.env.VUE_APP_ROOT_API+'users', {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -75,6 +78,14 @@ export default {
     };
 
     return model;
+  },
+  watch:{
+    age(newValue, oldValue){
+      console.log(newValue, oldValue);
+    },
+    users(new1, old1){
+      console.log(new1, old1);
+    }
   },
   components: {
     CounterC

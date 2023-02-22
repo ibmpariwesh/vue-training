@@ -1,7 +1,7 @@
 <template>
 <CounterC :count='users.length' prop2='test' @my-event="listenFromChild"></CounterC>
   <h4>User form</h4>
-  <input v-model="fname" />
+  <input v-model="fname" ref='firstname'/>
   <input v-model="age" type="number" />
   <input type="radio" name="gender" v-model="gender" value="Male" />Male
   <input type="radio" name="gender" v-model="gender" value="Female" />Female
@@ -93,6 +93,7 @@ export default {
   mounted() {
     //after DOM is pushed in DOM tree
     console.log("mounted");
+    this.$refs.firstname.focus();
   },
   beforeMount() {
     const promise = fetch(process.env.VUE_APP_ROOT_API+'users');

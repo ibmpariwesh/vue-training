@@ -1,4 +1,5 @@
 <template>
+<CounterC count=21 prop2='test'></CounterC>
   <h4>User form</h4>
   <input v-model="fname" />
   <input v-model="age" type="number" />
@@ -14,7 +15,7 @@
   {{ selected }}
   <select v-model="selected" >
     <option value="">Select one</option>
-    <option value="" v-for='option in options' :key='option'>{{option}}</option>
+    <option v-for='option in options' :key='option'>{{option}}</option>
 
   </select>
   <ol>
@@ -26,6 +27,7 @@
 </template>
 
 <script>
+import CounterC  from './Counter.vue';
 export default {
   name: "UserForm",
   computed: {
@@ -74,7 +76,9 @@ export default {
 
     return model;
   },
-  components: {},
+  components: {
+    CounterC
+  },
   mounted() {
     //after DOM is pushed in DOM tree
     console.log("mounted");

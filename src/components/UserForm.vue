@@ -45,7 +45,7 @@ export default {
       });
     },
     listenFromChild:function () {
-      console.log('test', arguments[0]);
+      console.log('test', arguments[1]);
     },
     add: function () {
       const payload = Object.assign({}, this); //copy of model

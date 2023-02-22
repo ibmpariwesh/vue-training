@@ -1,7 +1,7 @@
 <template>
   Counter component
   <div>{{ count }} {{prop2}}
-  <button @click="$emit('myEvent', 2,true)">send to parent</button>
+  <button @click="$emit('myEvent', 2,'pariwesh')">send to parent</button>
   </div>
 </template>
 
@@ -11,8 +11,6 @@ export default {
   emits:['myEvent'],
   setup(props) {
       console.log(props);
-      // props.prop2='initial value';
-    //   props.count=props.count
   },
   name: "CounterC",
 };

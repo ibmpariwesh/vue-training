@@ -2,11 +2,15 @@
   <h4>User form</h4>
   <input v-model="fname" />
   <input v-model="age" type="number" />
-  <input type='radio' name='gender' v-model='gender' value='Male'>Male
-  <input type='radio' name='gender' v-model='gender' value='Female'>Female
+  <input type="radio" name="gender" v-model="gender" value="Male" />Male
+  <input type="radio" name="gender" v-model="gender" value="Female" />Female
 
-  <input type='checkbox' v-model='registered' :true-value='true' :false-value='false'/>Registered?
-  <button @click="add" :disabled="fname.length < 1">save</button>{{ count }}
+  <input
+    type="checkbox"
+    v-model="registered"
+    :true-value="true"
+    :false-value="false"
+  />Registered? <button @click="add" :disabled="fname.length < 1">save</button>{{ count }}
   <ol>
     <li v-for="(user, index) in users" :key="user.id">
       {{ user.id }}{{ user.fname }}, {{ user.age
@@ -56,18 +60,28 @@ export default {
     const model = {
       fname: "Pariwesh",
       age: 10,
-      registered:true,
+      registered: true,
       users: [],
     };
+
+    return model;
+  },
+  components: {},
+  mounted() {
+    console.log('mounted');
+  },
+  beforeMount(){
     const promise = fetch(process.env.VUE_APP_ROOT_API);
     promise.then((response) => {
       response.json().then((users) => {
         this.users = users;
       });
     });
-    return model;
+    console.log('beforeMount');
   },
-  components: {},
+  beforeUpdate(){
+    console.log('beforeUpdate');
+  }
 };
 </script>
 

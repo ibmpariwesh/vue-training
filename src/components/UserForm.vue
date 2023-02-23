@@ -6,7 +6,7 @@
   <input type="radio" name="gender" v-model="gender" value="Male" />Male
   <input type="radio" name="gender" v-model="gender" value="Female" />Female
 
-  <input
+  <input 
     type="checkbox"
     v-model="registered"
     :true-value="true"
@@ -27,7 +27,6 @@
 </template>
 
 <script>
-import CounterC  from './Counter.vue';
 export default {
   name: "UserForm",
   computed: {
@@ -86,9 +85,6 @@ export default {
     users(new1, old1){
       console.log(new1, old1);
     }
-  },
-  components: {
-    CounterC
   },
   mounted() {
     //after DOM is pushed in DOM tree

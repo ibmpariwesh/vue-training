@@ -1,15 +1,13 @@
 <template>
-  <UserForm/>
+  <UserForm123/>
 </template>
 
 <script>
-import UserForm from './components/UserForm.vue'
 
 export default {
   name: 'App',
- 
   components: {
-    UserForm
+    // UserForm  //local registration
   }
 }
 </script>

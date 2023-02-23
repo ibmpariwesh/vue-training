@@ -3,7 +3,11 @@
   <div>
     {{ count }} {{ prop2 }}
     <button v-on:click="$emit('myEvent', 2, 'pariwesh')">send to parent</button>
-    <div v-for="(value, name, index) in top" :key='index'>{{ value }}, {{ name }}, {{index}}</div>
+    <div v-for="(value, name, index) in top" :key="index">
+      {{ value }}, {{ name }}, {{ index }}
+    </div>
+    <img :src="url" alt="this is an image" />
+    <img v-bind="{src:url, alt:'this is an image'}"/>
   </div>
 </template>
 
@@ -16,6 +20,7 @@ export default {
   },
   data() {
     return {
+      url: "/favicon.ico",
       top: {
         prop1: "v1",
         prop2: "v2",

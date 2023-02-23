@@ -1,13 +1,14 @@
 <template>
   Counter component
   <div>
-    {{ count }} {{ prop2 }}
+    <span v-once>{{ count }}</span> {{ prop2 }}
     <button v-on:click="$emit('myEvent', 2, 'pariwesh')">send to parent</button>
     <div v-for="(value, name, index) in top" :key="index">
       {{ value }}, {{ name }}, {{ index }}
     </div>
     <img :src="url" alt="this is an image" />
     <img v-bind="{src:url, alt:'this is an image'}"/>
+    <span v-pre>{{ this will not be compiled }}</span>
   </div>
 </template>
 

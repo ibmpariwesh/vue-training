@@ -1,13 +1,12 @@
 <template>
-<CounterC :count='users.length' prop2='test' @my-event="listenFromChild"></CounterC>
-  <h4>User form</h4>
+<CounterC :count='users.length' prop2='test' @my-event="listenFromChild" ></CounterC>
+  <h4 v-show='false'>User form</h4>
   <input v-model="fname" ref='firstname'/>
   <input v-model="age" type="number" />
   <input type="radio" name="gender" v-model="gender" value="Male" />Male
   <input type="radio" name="gender" v-model="gender" value="Female" />Female
-
   <input 
-    type="checkbox"
+    type="checkbox" 
     v-model="registered"
     :true-value="true"
     :false-value="false"
@@ -15,7 +14,7 @@
   {{ selected }}
   <select v-model="selected" >
     <option value="">Select one</option>
-    <option v-for='option in options' :key='option'>{{option}}</option>
+    <option v-for='option in options' :key='option' v-text='option'></option>
 
   </select>
   <ol>

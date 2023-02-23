@@ -1,7 +1,7 @@
 <template>
 <CounterC :count='users.length' prop2='test' @my-event="listenFromChild" ></CounterC>
   <h4 v-show='false'>User form</h4>
-  <input v-model="fname" ref='firstname'/>
+  <input v-model.lazy="fname" ref='firstname'/>
   <input v-model="age" type="number" />
   <input type="radio" name="gender" v-model="gender" value="Male" />Male
   <input type="radio" name="gender" v-model="gender" value="Female" />Female

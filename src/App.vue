@@ -1,11 +1,20 @@
 <template>
-  <UserForm123/>
+  <Suspense>
+    <template #default>
+      <UserForm123 />
+    </template>
+
+    <template #fallback>
+      <div>
+        <div>Loading...</div>
+        <img src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif" />
+      </div>
+    </template>
+  </Suspense>
 </template>
-
 <script>
-
 export default {
-  name: 'App',
+  name: "App",
   components: {
     // UserForm  //local registration
   }

@@ -1,3 +1,8 @@
+global components?
+
+
+npm run serve -- --mode=production
+
 # app1
 npm i -g json-server
 json-server db.json --watch
